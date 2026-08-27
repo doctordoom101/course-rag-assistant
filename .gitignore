@@ -1,0 +1,32 @@
+# Python / Backend
+backend/venv/
+backend/.venv/
+backend/__pycache__/
+backend/app/__pycache__/
+backend/app/api/__pycache__/
+backend/app/api/v1/__pycache__/
+backend/app/api/v1/endpoints/__pycache__/
+backend/app/core/__pycache__/
+backend/app/db/__pycache__/
+backend/app/rag/__pycache__/
+backend/app/schemas/__pycache__/
+backend/scripts/__pycache__/
+*.pyc
+
+# Local Data Persistence (Vector DB & Uploads)
+backend/data/qdrant_db/
+backend/data/uploads/
+backend/data/metadata.json
+
+# Node / Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/build/
+
+# Environment Variables & OS Files
+.env
+.env.local
+*.log
+.DS_Store
+Thumbs.db
