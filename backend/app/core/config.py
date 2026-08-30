@@ -1,10 +1,15 @@
 import os
 from pathlib import Path
-from pydantic_settings import BaseSettings
+from dotenv import load_dotenv
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 WORKSPACE_DIR = BASE_DIR.parent.parent
 ELEARNING_DIR = WORKSPACE_DIR / "modul-elearning"
+
+# Explicitly load .env file from backend directory
+ENV_PATH = BASE_DIR / ".env"
+load_dotenv(dotenv_path=ENV_PATH)
 
 class Settings(BaseSettings):
     PROJECT_NAME: str = "Big Data AI Teaching Assistant"
@@ -27,8 +32,11 @@ class Settings(BaseSettings):
     CHUNK_SIZE: int = 512
     CHUNK_OVERLAP: int = 64
     
-    class Config:
-        case_sensitive = True
+    model_config = SettingsConfigDict(
+        env_file=str(ENV_PATH),
+        env_file_encoding="utf-8",
+        extra="ignore"
+    )
 
 settings = Settings()
 

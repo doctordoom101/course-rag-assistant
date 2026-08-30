@@ -35,11 +35,12 @@ class RAGEngine:
         Settings.embed_model = self.embed_model
         
         # Inisialisasi LLM (Ollama / Gemini)
-        if settings.GEMINI_API_KEY:
+        gemini_key = settings.GEMINI_API_KEY.strip() if settings.GEMINI_API_KEY else ""
+        if gemini_key:
             try:
                 from llama_index.llms.gemini import Gemini
-                print("Using Gemini API Key for LLM.")
-                self.llm = Gemini(model="models/gemini-1.5-flash", api_key=settings.GEMINI_API_KEY)
+                print("Using Gemini API Key for LLM (models/gemini-1.5-flash).")
+                self.llm = Gemini(model="models/gemini-1.5-flash", api_key=gemini_key)
             except Exception as e:
                 print(f"Failed to load Gemini LLM ({e}), fallback to Ollama.")
                 self.llm = Ollama(model=settings.OLLAMA_MODEL, base_url=settings.OLLAMA_BASE_URL, request_timeout=120.0)
